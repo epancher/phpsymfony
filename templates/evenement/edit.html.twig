@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container mt-4">
+
+<h1>Editer l'évènement</h1>
+{{ include('evenement/_form.html.twig', {button: 'Editer'}) }} {# On inclue un template pour utiliser plusieurs fois le même bout de code #}
+</div>
+
+{% endblock %}     

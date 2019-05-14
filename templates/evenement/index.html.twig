@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container mt-4">
+<h1>Gérer les évènements</h1>
+
+{# Pour chacun des messages qui seraient dans les messages flash de success... 
+
+    (Ps: ne pas ajouter cette partie dans base.html.twig pour éviter de chercher ces messages à l'ouverture de toutes les pages) #}
+
+{% for message in app.flashes('success') %}
+
+{# ...afficher le dit message: #}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for evenement in evenements %}
+            <tr>
+                <td>{{ evenement.TitreEvnmt }}</td>
+                <td>
+                    <a href="{{ path('admin.evenement.edit', {id: evenement.id}) }}" class="btn btn-secondary">Editer</a>
+
+                    {# On utilise un mini formulaire qui renvoie vers admin.evenement.delete #}
+                    <form method="post" action="{{ path('admin.evenement.delete', {id: evenement.id}) }}" 
+                            style="display: inline-block" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cet évènement?')">    
+                        
+                        <input type="hidden" name="_method" value="DELETE">
+
+                        {# Pour éviter les injections dans l'url de suppression, il faut rajouter l'utilisation du jeton (token) CSRF: 
+                            csrf_token qui permet de générer une valeur (un nom + un numéro) 
+                            le caractère "~" permet de concaténer avec twig #}
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}">  
+                        
+                        <button class="btn btn-danger">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="text-right">
+    <a href="{{ path('admin.evenement.new') }}" class="btn btn-primary">Créer un nouvel évènement</a>
+</div>
+
+</div>
+{% endblock %}

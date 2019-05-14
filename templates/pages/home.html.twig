@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="jumbotron text-center">
+<h1>Bienvenue à Forcalquier</h1>
+
+<p>Sed maximum est in amicitia parem esse inferiori. Saepe enim excellentiae quaedam sunt, 
+qualis erat Scipionis in nostro, ut ita dicam, grege. Numquam se ille Philo, numquam Rupilio, 
+numquam Mummio anteposuit, numquam inferioris ordinis amicis, Q. </p>
+</div>
+
+<div class="container">
+<h2>Les derniers évènements</h2>
+<div class="row flex">
+    {% for evenement in evenements %}
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                    <a href="{{ path('show', {id: evenement.id, slug: evenement.slug}) }}">{{ evenement.TitreEvnmt }}</a>
+                    </h5>
+                    <p class="card-text">{{ evenement.TxtEvnmt }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
