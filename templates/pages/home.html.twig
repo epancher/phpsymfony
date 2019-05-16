@@ -19,7 +19,7 @@ numquam Mummio anteposuit, numquam inferioris ordinis amicis, Q. </p>
 
                 {# Partie pour ajouter une image au dessus de chaque évènement #}
                 {% if evenement.filename %}
-                <img src="/images/evenements/{{ evenement.filename }}" alt="card-img-top" style="width: 100%; height:auto">
+                <img src="{{ vich_uploader_asset(evenement, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto">
                 {% endif %}
 
                     {# Corps des évènements #}

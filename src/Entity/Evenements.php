@@ -41,6 +41,9 @@ class Evenements
 
     /**
      * @var File|null
+     * @Assert\Image(
+     *      mimeTypes="image/jpeg"
+     * )
      * @Vich\UploadableField(mapping="evenement_image", fileNameProperty="filename")
      */
     private $imageFile;
@@ -161,7 +164,7 @@ class Evenements
         ///////////////////////////////////////////////////////////////////////////
 
 
-        
+
 
         ///////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////

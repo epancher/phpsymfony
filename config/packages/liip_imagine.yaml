@@ -4,11 +4,11 @@ liip_imagine:
         thumb:
             quality: 75
             filters:
-                thumbnail: {size: [253, 162], mode: outbound, allow_upscale: true}
+                thumbnail: {size: [253, 155], mode: outbound, allow_upscale: true}
 
                 # create a 2px black border: center the thumbnail on a black background
                 # 4px larger to create a 2px border around the final image
-                background: { size: [255, 164], position: center, color: '#000000' }
+                background: { size: [255, 157], position: center, color: '#000000' }
 
      # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "gd"
