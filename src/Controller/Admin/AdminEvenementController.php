@@ -28,6 +28,8 @@ class AdminEvenementController extends AbstractController
         $this->em = $em;
     }
     
+
+
     /**
      * @Route("/admin", name="admin.evenement.index")
      * @return \Symfony\Component\HttpFoundation\Response
@@ -40,6 +42,8 @@ class AdminEvenementController extends AbstractController
             'current_menu' => 'properties'
         ]);
     }
+
+
 
     /**
      * @Route("/admin/evenement/create", name="admin.evenement.new")
@@ -62,6 +66,8 @@ class AdminEvenementController extends AbstractController
             'form' => $form->createView() // pour envoyer le formulaire à la vue, il faut passer par un createView pour créer un objet de type vue
         ]);
     }
+
+
 
     /**
      * @Route("/admin/evenement/{id}", name="admin.evenement.edit", methods="GET|POST")
@@ -86,6 +92,8 @@ class AdminEvenementController extends AbstractController
             'form' => $form->createView() // pour envoyer le formulaire à la vue, il faut passer par un createView pour créer un objet de type vue
         ]);
     }
+
+
 
     /**
      * @Route("/admin/evenement/{id}", name="admin.evenement.delete", methods="DELETE")
