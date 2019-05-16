@@ -6,12 +6,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EvenementsRepository")
  * 
  * pour que chaque évènement possède un nom unique non réutilisable:
  * @UniqueEntity("titre_evnmt")
+ * 
+ * @Vich\Uploadable
  */
 class Evenements
 {
@@ -27,6 +32,18 @@ class Evenements
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $filename;
+
+    /**
+     * @var File|null
+     * @Vich\UploadableField(mapping="evenement_image", fileNameProperty="filename")
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -49,6 +66,12 @@ class Evenements
      * @ORM\Column(type="time", nullable=true)
      */
     private $heure_evnmt;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime|null
+     */
+    private $updated_at;
 
 
 
@@ -92,6 +115,43 @@ class Evenements
     {$this->heure_evnmt = $heure_evnmt;
      return $this;}
 
+    /**
+     * @return null|string
+     */
+    public function getFilename(): ?string
+    {return $this->filename;}
+
+    /**
+     * @param null|string $filename
+     * @return Evenements
+     */
+    public function setFilename(?string $filename): Evenements
+    {$this->filename = $filename;
+     return $this;}
+
+    /**
+     * @return null|File
+     */
+    public function getImageFile(): ?File
+    {return $this->imageFile;}
+
+    /**
+     * @param null|File $imageFile
+     * @return Evenements
+     */
+    public function setImageFile(?File $imageFile): Evenements
+    {$this->imageFile = $imageFile;
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->updated_at = new \DateTime('now');
+        }
+     return $this;}
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {return $this->updated_at;}
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {$this->updated_at = $updated_at;
+     return $this;}
 
 
         ///////////////////////////////////////////////////////////////////////////

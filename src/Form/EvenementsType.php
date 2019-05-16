@@ -6,6 +6,7 @@ use App\Entity\Evenements;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class EvenementsType extends AbstractType
 {
@@ -16,6 +17,9 @@ class EvenementsType extends AbstractType
             ->add('txt_evnmt')
             ->add('date_evnmt')
             ->add('heure_evnmt')
+            ->add('imageFile', FileType::class, [
+                'required' => false
+            ])
         ;
     }
 

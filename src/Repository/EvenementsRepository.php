@@ -6,6 +6,7 @@ use App\Entity\Evenements;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Query;
 
 /**
  * @method Evenements|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,13 +22,12 @@ class EvenementsRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Evenements[]
+     * @return Query
      */
-    public function findAllVisible() : array
+    public function findAllVisibleQuery() : Query
     {
         return $this->findVisibleQuery()
         ->getQuery()
-        ->getResult()
     ;
     }
 
@@ -75,7 +75,7 @@ class EvenementsRepository extends ServiceEntityRepository
     private function findVisibleQuery() : QueryBuilder
     {
         return $this->createQueryBuilder('p')
-        ->where('p.titre_evnmt = \'feux de la St Jean\'')
+        //->where('p.titre_evnmt = \'feux de la St Jean\'')
         ;
     }
 }

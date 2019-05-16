@@ -1,29 +1,26 @@
 {% extends 'base.html.twig' %}
 
+{% block title 'Tous nos évènements' %}
+
 {% block body %}
 
-<div class="jumbotron text-center">
-<h1>Liste des évènements</h1>
+    <div class="container mt-4">
+      
+        <h1>Liste des évènements</h1>
 
-</div>
+            <div class="row">
+                {% for evenement in evenements %}
 
-<div class="container">
-
-    <div class="row flex">
-        {% for evenement in evenements %}
-            <div class="col-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                        <a href="{{ path('show', {id: evenement.id, slug: evenement.slug}) }}">{{ evenement.TitreEvnmt }}</a>
-                        </h5>
-                        <p class="card-text">{{ evenement.TxtEvnmt }}</p>
+                    <div class="col-md-3">
+                        {% include 'evenement/_evenement.html.twig' %}
                     </div>
-                </div>
+
+                {% endfor %}
             </div>
-        {% endfor %}
+
+            <div class="pagination">
+                {{ knp_pagination_render(evenements) }}
+            </div>
     </div>
 
 {% endblock %}
-
-{% block javascripts %}{% endblock %}

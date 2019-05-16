@@ -7,6 +7,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\EvenementsRepository;
 use App\Entity\Evenements;
 use Doctrine\Common\Persistence\ObjectManager;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class EvenementsController extends AbstractController{
 
@@ -33,12 +35,12 @@ private $em;
  * @return Response
  */
 
-    public function index(EvenementsRepository $repository) : Response
+    public function index(PaginatorInterface $paginator, Request $request) : Response
     {
         
         /*$evenement = new Evenements();
-        $evenement->setTitreEvnmt('Johnny Halliday Tribute Festival')
-                  ->setTxtEvnmt('texte')
+        $evenement->setTitreEvnmt('Festival de la Groseille')
+                  ->setTxtEvnmt('Venez nombreux assister aux évènements internationaux liés à la groseille')
                   ->setDateEvnmt(new \DateTime('now'))
                   ->setHeureEvnmt(null);
         $em = $this->getDoctrine()->getManager();
@@ -54,7 +56,10 @@ private $em;
         $this->em->flush();
         dump($evenement);*/
         
-        $evenements = $repository->findAll();
+        $evenements = $paginator->paginate(
+            $this->repository->findAllVisibleQuery(),
+            $request->query->getInt('page', 1), 12
+        );
         return $this->render('pages/evenements.html.twig', [
             'evenements' => $evenements,
             'current_menu' => 'properties'

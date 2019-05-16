@@ -27,6 +27,7 @@ class AdminEvenementController extends AbstractController
         $this->repository = $repository;
         $this->em = $em;
     }
+    
     /**
      * @Route("/admin", name="admin.evenement.index")
      * @return \Symfony\Component\HttpFoundation\Response
