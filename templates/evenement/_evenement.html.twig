@@ -1,4 +1,9 @@
-<div class="card mb-4">
+<div class="card mb-4 mt-2">
+
+        {% if evenement.filename %}
+            <img src="{{ vich_uploader_asset(evenement, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto;">
+        {% endif %}
+
     <div class="card-body">
         <h5 class="card-title">
             <a href="{{ path('show', {slug: evenement.slug, id: evenement.id}) }}">
