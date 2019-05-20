@@ -3,8 +3,37 @@
 {% block title evenement.TitreEvnmt %}
 
 {% block body %}
+<div class="jumbotron">
+    <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+
+                    {% if evenement.filename %}
+                        <img src="{{ vich_uploader_asset(evenement, 'imageFile') | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:auto;">
+                    {% else %}
+                        <img src="{{ '/images/evenements/empty.jpg' | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:auto;">
+                    {% endif %}
+                </div>
+
+                <div class="col-md-4">
+
+                    <h1><strong><u>{{ evenement.TitreEvnmt }}</u></strong></h1>
+                    <h3>le {{ evenement.DateEvnmt|localizeddate('none', 'none', null, null, 'EEEE d MMMM Y') }}</h3>
+                    <br>
+
+                    {% if evenement.HeureEvnmt %}   {# On affiche uniquement l'horaire s'il est présent en base de donnée #}
+                    <h2>à partir de {{ evenement.HeureEvnmt ? evenement.HeureEvnmt|date('H') }}h{{ evenement.HeureEvnmt ? evenement.HeureEvnmt|date('i') }}</h2>
+                    <br>
+                    {% endif %}
+                    
+                    <a href="#" class="btn btn-primary">Nous contacter</a>
+                </div>
+
+            </div>
+    </div>
+</div>
 <div class="container mt-4">
-    <h1>{{ evenement.TitreEvnmt }}</h1>
+    
 
     <p>{{ evenement.TxtEvnmt }}</p>
 </div>
