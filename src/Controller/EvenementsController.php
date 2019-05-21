@@ -9,6 +9,9 @@ use App\Entity\Evenements;
 use Doctrine\Common\Persistence\ObjectManager;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\ContactType;
+use App\Entity\Contact;
+use App\Notification\ContactNotification;
 
 class EvenementsController extends AbstractController{
 
@@ -71,7 +74,7 @@ private $em;
  * @param Evenements $evenement
  * @return Response
  */
-    public function show(Evenements $evenement, string $slug): Response
+    public function show(Evenements $evenement, string $slug, Request $request, ContactNotification $notification): Response
     {
         if($evenement->getSlug() !== $slug){
            return  $this->redirectToRoute('show', [
@@ -79,9 +82,26 @@ private $em;
                 'slug' => $evenement->getSlug()
             ], 301);
         }
+
+        $contact = new Contact();
+        $contact->setEvenement($evenement);
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $notification->notify($contact);
+            $this->addFlash('success', 'Votre email a bien été envoyé');
+            return $this->redirectToRoute('show', [
+                'id' => $evenement->getId(),
+                'slug' => $evenement->getSlug()
+            ]);
+        }
+
         return $this->render('pages/show.html.twig', [
             'evenement' => $evenement,
-            'current_menu' => 'evenement'
+            'current_menu' => 'evenement',
+            'form' => $form->createView()
         ]);
     }
 

@@ -1,0 +1,36 @@
+<html>
+    <body>
+        <div>
+            <td><b>événement: </b></td>
+            <td><a href="{{ url('show', {id: contact.evenement.id, slug: contact.evenement.slug}) }}">{{ contact.evenement.titreEvnmt }}</a></td>
+        </div>
+
+        <br>
+
+        <div>
+            <td><b>Nom:</b></td>
+            <td>{{ contact.firstname }} {{ contact.lastname }}</td>
+        </div>
+
+        <br>
+
+        <div>
+            <td><b>tél:</b></td>
+            <td>{{ contact.phone }}</td>
+        </div>
+
+        <br>
+        
+        <div>
+            <td><b>mail:</b></td>
+            <td>{{ contact.email }}</td>
+        </div>
+        
+        <br><br>
+
+        <div>
+            <td><b>Message:</b></td><br>
+            <td>{{ contact.message | nl2br }}</td>
+        </div>
+    </body>
+</html>
