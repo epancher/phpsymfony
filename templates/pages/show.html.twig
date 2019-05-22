@@ -41,8 +41,8 @@
                     <br>
                     {% endif %}
                     
-                    <a href="#" class="btn btn-primary">Nous contacter</a>
-                        <div id="contactForm" class="mt-4">
+                    <a href="#" class="btn btn-primary" id="contactButton"{% if form.vars.submitted %} style="display: none;"{% endif %}>Nous contacter</a>
+                        <div id="contactForm" class="mt-4"{% if not form.vars.submitted %} style="display: none;"{% endif %}>
                             {{ form_start(form) }}
 
                                 <div class="row">
