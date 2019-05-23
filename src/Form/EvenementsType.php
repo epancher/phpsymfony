@@ -17,8 +17,9 @@ class EvenementsType extends AbstractType
             ->add('txt_evnmt')
             ->add('date_evnmt')
             ->add('heure_evnmt')
-            ->add('imageFile', FileType::class, [
-                'required' => false
+            ->add('pictureFiles', FileType::class, [
+                'required' => false,
+                'multiple' => true
             ])
         ;
     }

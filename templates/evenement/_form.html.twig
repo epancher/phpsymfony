@@ -2,5 +2,15 @@
     {{ form_widget(form)}}  {# A 11m44s dans la video (https://www.youtube.com/watch?v=6Ryu7-VSV5k) 
                                (tuto symfony 4 4/16) pour mettre plusieurs champs sur la même ligne#}
     <button class="btn btn-primary">{{button | default('Enregistrer') }}</button>
-    {{ form_row(form.imageFile) }}
+    {{ form_row(form.pictureFiles) }}
+
+    {% for picture in evenement.pictures %}
+        <div class="col" style="width: 100px; flex: none; margin: 5px;">
+            <img src="{{ vich_uploader_asset(evenement.picture, 'imageFile') | imagine_filter('thumb') }}" width="100" alt="">
+        
+                {# On utilise un mini formulaire qui renvoie vers admin.evenement.delete #}
+                <a href="{{ path('admin.picture.delete', {id: picture.id}) }}" class="btn btn-danger" data-delete data-token="{{ csrf_token('delete' ~ picture.id) }}">Supprimer</a>
+
+        </div>
+    {% endfor %}
 {{ form_end(form)}}

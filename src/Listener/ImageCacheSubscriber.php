@@ -7,6 +7,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use App\Entity\Picture;
 
 class ImageCacheSubscriber implements EventSubscriber
 {
@@ -44,7 +45,7 @@ class ImageCacheSubscriber implements EventSubscriber
         $entity = $args->getEntity();
 
         // on ne veut pas vider le cache pour autre chose qu'un nouvel évènement:you
-        if (!$entity instanceof Evenements){
+        if (!$entity instanceof Picture){
             return;
         }
         $this->cacheManager->remove($this->uploaderHelper->asset($entity, 'imageFile'));
@@ -56,7 +57,7 @@ class ImageCacheSubscriber implements EventSubscriber
         $entity = $args->getEntity();
 
         // on ne veut pas vider le cache pour autre chose qu'un nouvel évènement:
-        if (!$entity instanceof Evenements){
+        if (!$entity instanceof Picture){
             return;
         }
 

@@ -1,9 +1,9 @@
 <div class="card mb-4 mt-2">
 
-        {% if evenement.filename %}
-            <img src="{{ vich_uploader_asset(evenement, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto;">
+        {% if evenement.picture %}
+            <img src="{{ vich_uploader_asset(evenement.picture, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto;">
         {% else %}
-            <img src="{{ '/images/evenements/empty.jpg' | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto;">
+            <img src="{{ '/images/empty.jpg' | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto;">
         {% endif %}
 
     <div class="card-body">
