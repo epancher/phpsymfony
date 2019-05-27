@@ -3,37 +3,40 @@
 {% block body %}
 
 <div class="jumbotron text-center">
-<h1>Bienvenue à Forcalquier</h1>
+    <h1>Bienvenue à Forcalquier</h1>
 
-<p>Sed maximum est in amicitia parem esse inferiori. Saepe enim excellentiae quaedam sunt, 
-qualis erat Scipionis in nostro, ut ita dicam, grege. Numquam se ille Philo, numquam Rupilio, 
-numquam Mummio anteposuit, numquam inferioris ordinis amicis, Q. </p>
+    <p>Sed maximum est in amicitia parem esse inferiori. Saepe enim excellentiae quaedam sunt, 
+    qualis erat Scipionis in nostro, ut ita dicam, grege. Numquam se ille Philo, numquam Rupilio, 
+    numquam Mummio anteposuit, numquam inferioris ordinis amicis, Q. </p>
 </div>
 
 <div class="container">
-<h2>Les derniers évènements</h2>
-<div class="row flex">
-    {% for evenement in evenements %}
-        <div class="col-3">
-            <div class="card mt-2">
+    <h2>{% trans %}Les derniers évènements{% endtrans %} </h2>
+    <div class="row flex">
+        {% for evenement in evenements %}
+            <div class="col-3">
+                <div class="card mt-2">
 
-                {# Partie pour ajouter une image au dessus de chaque évènement #}
-                {% if evenement.picture %}
-                <img src="{{ vich_uploader_asset(evenement.picture, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto;">
-                {% else %}
-                    <img src="{{ '/images/empty.jpg' | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto;">
-                {% endif %}
+                    {# Partie pour ajouter une image au dessus de chaque évènement #}
+                    {% if evenement.picture %}
+                        <img src="{{ vich_uploader_asset(evenement.picture, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto;">
+                    {% else %}
+                        <img src="{{ '/images/empty.jpg' | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto;">
+                    {% endif %}
 
-                {# Corps des évènements #}
-                <div class="card-body">
-                    <h5 class="card-title">
-                    <a href="{{ path('show', {id: evenement.id, slug: evenement.slug}) }}">{{ evenement.TitreEvnmt }}</a>
-                    </h5>
-                    <p class="card-text">{{ evenement.TxtEvnmt }}</p>
-                </div>
+                    {# Corps des évènements #}
+                    <div class="card-body">
+                        <h5 class="card-title">
+                        <a href="{{ path('show', {id: evenement.id, slug: evenement.slug}) }}">{{ evenement.TitreEvnmt }}</a>
+                        </h5>
+                        <p class="card-text">{{ evenement.TxtEvnmt }}</p>
+                    </div>
+                </div>     
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+        <div id="map" style="width: 100%; height: 400px" data-lat="{{ emplacement.lat }}" data-lng="{{ emplacement.lng }}"></div>
+    </div>
+
 </div>
 
 {% endblock %}

@@ -16,6 +16,8 @@
     "dependencies": {
         "babel-preset-es2017": "^6.24.1",
         "jquery": "^3.4.1",
+        "leaflet": "^1.5.1",
+        "places.js": "^1.16.4",
         "select2": "^4.0.7"
     }
 }
