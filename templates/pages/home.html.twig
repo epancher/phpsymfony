@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block head %}
+
+{% endblock %}
+
+
 {% block body %}
 
 <div class="jumbotron text-center">
@@ -34,10 +39,16 @@
                 </div>     
             </div>
         {% endfor %}
-        <div id="map" style="width: 100%; height: 400px" data-lat="{{ emplacement.lat }}" data-lng="{{ emplacement.lng }}"></div>
+
+        <div id="map" style="width: 50%; height: 400px"></div>
+
     </div>
 
 </div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+crossorigin=""/>
 
 {% endblock %}
 

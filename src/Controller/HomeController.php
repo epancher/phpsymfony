@@ -5,8 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\EvenementsRepository;
-use App\Entity\Emplacement;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends AbstractController{
 
@@ -19,22 +18,25 @@ class HomeController extends AbstractController{
     public function index(EvenementsRepository $repository) : Response
     {
         $evenements = $repository->findLatest();
-        $emplacement = new Emplacement();
         dump($evenements);
         return $this->render('pages/home.html.twig', [
-            'evenements' => $evenements,
-            'emplacement' => $emplacement
+            'evenements' => $evenements
         ]);
+    }
 
+    /**
+     * @Route("/setlocale/{language}", name="setlocale")
+     */
+    public function setLocaleAction(Request $request, $language = null) // cette fonction vient de https://openclassrooms.com/forum/sujet/symfony-setlocale-langue?page=1
+    {                                                                   // c'est le listener de notre traduction
+        if($language != null)
+        {$this->get('session')->set('_locale', $language);}
+    
+        $url = $request->headers->get('referer');   
 
+        if(empty($url))
+        {$url = $this->container->get('router')->generate('index');}
 
-        $builder->add('isAttending', ChoiceType::class, [
-            'choices'  => [
-                'Maybe' => null,
-                'Yes' => true,
-                'No' => false,
-            ],
-        ]);
-
+        return $this->redirect($url);
     }
 }

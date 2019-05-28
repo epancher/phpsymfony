@@ -115,7 +115,7 @@ class Evenements
     public function getUpdatedAt(): ?\DateTimeInterface
     {return $this->updated_at;}
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {$this->updated_at = $updated_at;
      return $this;}
 
