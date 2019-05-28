@@ -17,9 +17,6 @@ let $ = require('jquery')
 // any CSS you require will output into a single css file (app.css in this case)
 require('../css/app.css');
 
-require('select2')
-
-$('select').select2()
 
 let $contactButton = $('#contactButton')
 $contactButton.click(e => {

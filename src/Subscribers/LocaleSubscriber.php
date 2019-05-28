@@ -1,5 +1,7 @@
 <?php
 
+// Listener de la traduction
+
 namespace App\Subscribers;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

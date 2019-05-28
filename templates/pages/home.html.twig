@@ -40,7 +40,7 @@
             </div>
         {% endfor %}
 
-        <div id="map" style="width: 50%; height: 400px"></div>
+        <div id="map" style="width: 100%; height: 400px" class="mt-4 mb-4"></div>
 
     </div>
 
@@ -48,7 +48,7 @@
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
 integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-crossorigin=""/>
+crossorigin=""/> {# Permet d'afficher correctement la carte car la ligne import 'leaflet/dist/leaflet.css'; dans map.js ne fonctionne pas... #}
 
 {% endblock %}
 

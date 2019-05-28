@@ -9,7 +9,8 @@
             <img src="{{ vich_uploader_asset(evenement.picture, 'imageFile') | imagine_filter('thumb') }}" width="100" alt="">
         
                 {# On utilise un mini formulaire qui renvoie vers admin.evenement.delete #}
-                <a href="{{ path('admin.picture.delete', {id: picture.id}) }}" class="btn btn-danger" data-delete data-token="{{ csrf_token('delete' ~ picture.id) }}">Supprimer</a>
+                <a href="{{ path('admin.picture.delete', {id: picture.id}) }}" class="btn btn-danger" 
+                   data-delete data-token="{{ csrf_token('delete' ~ picture.id) }}">Supprimer</a>
 
         </div>
     {% endfor %}
